@@ -36,5 +36,7 @@ double PID::TotalError() {
   /**
    * TODO: Calculate and return the total error
    */
-  return 0.0;  // TODO: Add your total error calc here!
+  return (-this->kp * this->p_error) +
+      (-this->ki * this->i_error) +
+      (-this->kd * this->d_error);  // TODO: Add your total error calc here!
 }
