@@ -18,7 +18,7 @@ class TwiddleState
   public:
       virtual ~TwiddleState() {;}
       
-      virtual void run() = 0;
+      virtual void run(double error) = 0;
       void setContext(Twiddle* context);
 };
 
@@ -35,7 +35,7 @@ class TwiddleIncrease : public TwiddleState
 {
   public:
     TwiddleIncrease() : TwiddleState("Increase") {;}
-    void run() override;
+    void run(double error) override;
 
     ~TwiddleIncrease() {;}
 };
@@ -44,7 +44,7 @@ class TwiddleDecrease : public TwiddleState
 {
   public:
     TwiddleDecrease() : TwiddleState("Decrease") {;}
-    void run() override;
+    void run(double error) override;
 };
 
 

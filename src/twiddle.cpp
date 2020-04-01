@@ -11,7 +11,7 @@ void Twiddle::changeState(TwiddleState* state)
     current_state_->setContext(this);
 }
 
-void TwiddleStart::run()
+void TwiddleStart::run(double error)
 {
     if (std::accumulate(context_->gains_delta_.begin(),
             context_->gains_delta_.end(), 0.0) < context_->tolerance_)
@@ -25,12 +25,12 @@ void TwiddleStart::run()
     context_->changeState(new TwiddleIncrease());
 }
 
-void TwiddleIncrease::run()
+void TwiddleIncrease::run(double error)
 {
     ;
 }
 
-void TwiddleDecrease::run()
+void TwiddleDecrease::run(double error)
 {
     ;
 }
