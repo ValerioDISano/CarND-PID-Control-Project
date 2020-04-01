@@ -41,18 +41,19 @@ class TwiddleDecrease : public TwiddleState
 class 
 {
   public:
-    Twiddle()
+    Twiddle(const double& tolerance=0.2) : tolerance_ {tolerance} {;}
     ~Twiddle()
 
     void changeState(TwiddleState* state);
   private:
     void Run();
-    std::vector<double> gains;
-    std::vector<double> gains_delta;
-    std::vector<double> best_solution;
-    std::unique_ptr<TwiddleState> current_state;
-
-    std::size_t index {0};
+    std::vector<double> gains_;
+    std::vector<double> gains_delta_;
+    std::vector<double> best_solution_;
+    std::unique_ptr<TwiddleState> current_state_;
+    
+    double tolerance_;
+    std::size_t index_ {0};
 };
 
 #endif // TWIDDLE_HPP
