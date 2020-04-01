@@ -8,8 +8,8 @@ class TwiddleState
 {
   protected:
       std::shared_ptr<Twiddle> context_;
-  public:
       std::string state;
+  public:
       virtual void run() = 0;
 
       void setContext(Twiddle* context);
@@ -18,6 +18,7 @@ class TwiddleState
 class TwiddleStart : public TwiddleState
 {
   public:
+    TwiddleStart() : state{"Start"} {;}
     void run() override;
   
 };
@@ -25,17 +26,19 @@ class TwiddleStart : public TwiddleState
 class TwiddleIncrease : public TwiddleState
 {
   public:
+    TwiddleIncrease() : state{"Increase"} {;}
     void run() override;
 };
 
 class TwiddleDecrease : public TwiddleState
 {
   public:
+    TwiddleDecrease() : state{"Decrease"} {;}
     void run() override;
 };
 
 
-class Twiddle
+class 
 {
   public:
     Twiddle()
@@ -48,6 +51,8 @@ class Twiddle
     std::vector<double> gains_delta;
     std::vector<double> best_solution;
     std::unique_ptr<TwiddleState> current_state;
+
+    std::size_t index {0};
 };
 
 #endif // TWIDDLE_HPP
