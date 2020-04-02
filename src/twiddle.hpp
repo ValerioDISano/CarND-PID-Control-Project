@@ -26,7 +26,7 @@ class TwiddleStart : public TwiddleState
 {
   public:
     TwiddleStart() : TwiddleState("start") {;}
-    void run() override;
+    void run(double error) override;
     
     ~TwiddleStart() {;} 
 };
@@ -60,6 +60,7 @@ class Twiddle
     std::vector<double> best_solution_;
     
     double tolerance_;
+    double best_error_;
     std::size_t index_ {0};
   private:
     void Run();
