@@ -27,10 +27,32 @@ void TwiddleStart::run(double error)
 
 void TwiddleIncrease::run(double error)
 {
-    ;
+    if (error < context_->best_error_)
+    {
+        context_->best_error_ = error;
+        context_->gains_delta_[context_->index_] *= 1.1;
+        context_->best_solution_ = context_->gains_;
+
+        context_->index_ = (context_->index_ + 1) % context_->gains_.size();
+
+        context_->changeState(new TwiddleStart());
+        return;
+    }
+
+    context_->gains_[context_->index_] -= 2.0 * context_->gains_delta_[context_->index_];
+
+    context_->changeState(new TwiddleDecrease());
 }
 
 void TwiddleDecrease::run(double error)
 {
-    ;
+    if (error < context_->best_error_)
+    {
+        context_->best_error_ = error;
+        context_->gains_delta_[context_->index_] *= 0.9;
+
+        context_->index_ = (context_->index_ + 1) % context_->gains_.size();
+    }
+
+    context_->changeState(new TwiddleStart());
 }
