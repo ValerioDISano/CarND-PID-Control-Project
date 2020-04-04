@@ -63,7 +63,7 @@ class Twiddle
 
     double best_error_ {std::numeric_limits<double>::max()};
     double average_error_ {0.0};
-    void changeState(TwiddleState* state);
+    std::size_t index_ {0};
     std::vector<double> gains_;
     std::vector<double> gains_delta_;
     std::vector<double> best_solution_;
@@ -71,6 +71,7 @@ class Twiddle
     double tolerance_;
     double best_error_;
     std::size_t index_ {0};
+    void changeState(TwiddleState* state);
     bool Run(double error);
   private:
     std::unique_ptr<TwiddleState> current_state_;
