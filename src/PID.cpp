@@ -36,7 +36,14 @@ double PID::TotalError() {
   /**
    * TODO: Calculate and return the total error
    */
-  return (-this->Kp * this->p_error) +
+  double error = (-this->Kp * this->p_error) +
       (-this->Ki * this->i_error) +
       (-this->Kd * this->d_error);  // TODO: Add your total error calc here!
-}
+
+  if (error < -1.0)
+      error = -1.0;
+  else if (error > 1.0)
+      error = 1.0;
+
+  return error;
+}   
