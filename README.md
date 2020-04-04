@@ -32,4 +32,4 @@ I left the algorithm run until it reached convergence, obtaining the following o
 
 The algorithm found this parameters trying to minimize the Mean Absolute Error, computed as follow:
 
-<a href="https://www.codecogs.com/eqnedit.php?latex=MAE&space;=&space;\frac{1}{iterations}&space;\sum_{i=1}^{&space;iterations}&space;CTE_i" target="_blank"><img src="https://latex.codecogs.com/gif.latex?MAE&space;=&space;\frac{1}{iterations}&space;\sum_{i=1}^{&space;iterations}&space;CTE_i" title="MAE = \frac{1}{iterations} \sum_{i=1}^{ iterations} CTE_i" /></a>
+<a href="https://www.codecogs.com/eqnedit.php?latex=MAE&space;=&space;\frac{1}{iterations}&space;\sum_{i=1}^{&space;iterations}&space;\left&space;|&space;CTE_i&space;\right&space;|" target="_blank"><img src="https://latex.codecogs.com/gif.latex?MAE&space;=&space;\frac{1}{iterations}&space;\sum_{i=1}^{&space;iterations}&space;\left&space;|&space;CTE_i&space;\right&space;|" title="MAE = \frac{1}{iterations} \sum_{i=1}^{ iterations} \left | CTE_i \right |" /></a>
