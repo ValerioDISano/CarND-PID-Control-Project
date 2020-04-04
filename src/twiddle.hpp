@@ -16,6 +16,7 @@ class TwiddleState
       TwiddleState(std::string state) : state_ {state} {;}
   
   public:
+      std::string state_;
       virtual ~TwiddleState() {;}
       
       virtual void run(double error) = 0;
