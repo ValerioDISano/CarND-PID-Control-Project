@@ -70,8 +70,8 @@ class Twiddle
     double tolerance_;
     double best_error_;
     std::size_t index_ {0};
+    bool Run(double error);
   private:
-    void Run(double error);
     std::unique_ptr<TwiddleState> current_state_;
     std::unique_ptr<TwiddleState> old_state_;
 
