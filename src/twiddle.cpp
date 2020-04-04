@@ -18,11 +18,11 @@ void TwiddleStart::run(double error)
             context_->gains_delta_.end(), 0.0) < context_->tolerance_)
     {
         context_->best_solution_ = context_->gains_;
+        context_->done = true;
         return;
     }
 
     context_->gains_[context_->index_] += context_->gains_delta_[context_->index_];
-
     context_->changeState(new TwiddleIncrease());
 }
 
@@ -60,6 +60,8 @@ void TwiddleDecrease::run(double error)
 
     context_->changeState(new TwiddleStart());
     context_->index_ = (context_->index_ + 1) % context_->gains_.size();
+
+}
 
 bool Twiddle::Run(double error)
 {
