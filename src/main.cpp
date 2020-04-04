@@ -31,6 +31,8 @@ string hasData(string s) {
   return "";
 }
 
+bool OPTIMIZATION = true;
+
 int main() {
   uWS::Hub h;
 
@@ -42,7 +44,7 @@ int main() {
   //pid.Init(0.0, 0.0, 0.0);
   Twiddle twiddle {pid.getGains()};
 
-  h.onMessage([&pid](uWS::WebSocket<uWS::SERVER> ws, char *data, size_t length, 
+  h.onMessage([&pid, &twiddle](uWS::WebSocket<uWS::SERVER> ws, char *data, size_t length, 
                      uWS::OpCode opCode) {
     // "42" at the start of the message means there's a websocket message event.
     // The 4 signifies a websocket message
@@ -67,18 +69,46 @@ int main() {
            * NOTE: Feel free to play around with the throttle and speed.
            *   Maybe use another PID controller to control the speed!
            */
+          bool twiddle_status = false;
+          if (OPTIMIZATION)
+          {
+              twiddle_status = twiddle.Run(cte);
+          }
           pid.UpdateError(cte);
           steer_value = pid.TotalError();
           
           // DEBUG
-          std::cout << "CTE: " << cte << " Steering Value: " << steer_value 
-                    << std::endl;
+          //std::cout << "CTE: " << cte << " Steering Value: " << steer_value 
+          //          << std::endl;
+          
+          if (OPTIMIZATION && twiddle_status)
+          {
+            pid.Init(twiddle.gains_[0],
+                    twiddle.gains_[1],
+                    twiddle.gains_[2]);
+
+            std::cout << "[TWIDDLE] current solution: Kp " << twiddle.best_solution_[0] <<
+                " Ki " << twiddle.best_solution_[1] <<
+                " Kd " << twiddle.best_solution_[2] << "\n";
+            
+            if (twiddle.done)
+            {
+                OPTIMIZATION = false;
+                std::cout << "[TWIDDLE] BEST SOLUTION FOUND: Kp " << twiddle.best_solution_[0] <<
+                    " Ki " << twiddle.best_solution_[1] <<
+                    " Kd " << twiddle.best_solution_[2] << "\n";
+            }
+
+            const std::string msg = "42[\"reset\",{}]";
+            ws.send(msg.data(), msg.length(), uWS::OpCode::TEXT);
+            return;
+          }
 
           json msgJson;
           msgJson["steering_angle"] = steer_value;
           msgJson["throttle"] = 0.3;
           auto msg = "42[\"steer\"," + msgJson.dump() + "]";
-          std::cout << msg << std::endl;
+          //std::cout << msg << std::endl;
           ws.send(msg.data(), msg.length(), uWS::OpCode::TEXT);
         }  // end "telemetry" if
       } else {
