@@ -5,6 +5,7 @@
 #include <vector>
 #include <string>
 #include <numeric> // accumulate
+#include <limits> // double max value
 
 class Twiddle; // forward declaration
 
@@ -60,6 +61,8 @@ class Twiddle
     }
     ~Twiddle() {;};
 
+    double best_error_ {std::numeric_limits<double>::max()};
+    double average_error_ {0.0};
     void changeState(TwiddleState* state);
     std::vector<double> gains_;
     std::vector<double> gains_delta_;
