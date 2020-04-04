@@ -7,6 +7,7 @@ void TwiddleState::setContext(Twiddle* context)
 
 void Twiddle::changeState(TwiddleState* state)
 {
+    old_state_ = std::move(current_state_);
     current_state_ = std::unique_ptr<TwiddleState>(state);
     current_state_->setContext(this);
 }
