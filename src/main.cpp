@@ -4,6 +4,7 @@
 #include <string>
 #include "json.hpp"
 #include "PID.h"
+#include "twiddle.hpp"
 
 // for convenience
 using nlohmann::json;
@@ -37,7 +38,9 @@ int main() {
   /**
    * TODO: Initialize the pid variable.
    */
-  pid.Init(1.0, 0.01, 0.001);
+  pid.Init(0.158459, 0.0, 0.72632);
+  //pid.Init(0.0, 0.0, 0.0);
+  Twiddle twiddle {pid.getGains()};
 
   h.onMessage([&pid](uWS::WebSocket<uWS::SERVER> ws, char *data, size_t length, 
                      uWS::OpCode opCode) {
