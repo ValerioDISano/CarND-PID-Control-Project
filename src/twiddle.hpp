@@ -12,8 +12,7 @@ class Twiddle; // forward declaration
 class TwiddleState
 {
   protected:
-      std::shared_ptr<Twiddle> context_;
-      std::string state_;
+      Twiddle* context_;
       TwiddleState(std::string state) : state_ {state} {;}
   
   public:
