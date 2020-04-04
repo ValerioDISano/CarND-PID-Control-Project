@@ -26,9 +26,9 @@ The derivate component takes into account the error change rate between the curr
 In oder to have an effective PID controller it is necessary that the algorithm gains are correctly tuned. I used the Twiddle algorithm to search the optimal hyper-paramters.
 Initially, I set PID gains to zero, so no control was applied to the car steering angle. 
 I left the algorithm run until it reached convergence, obtaining the following optimal parameters: 
-- Kp 0.148459
-- Ki 0.0
-- Kd 0.669442
+- Kp 0.1484559
+- Ki 0.0001
+- Kd 0.696846
 
 The algorithm found this parameters trying to minimize the Mean Absolute Error, computed as follow:
 
