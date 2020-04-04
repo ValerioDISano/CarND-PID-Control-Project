@@ -77,6 +77,10 @@ class Twiddle
     std::unique_ptr<TwiddleState> current_state_;
     std::unique_ptr<TwiddleState> old_state_;
 
+    std::size_t it_ {0};
+    std::size_t force_run_ {1200};
+    std::size_t max_it_;
+    double maximum_error_;
 };
 
 #endif // TWIDDLE_HPP
