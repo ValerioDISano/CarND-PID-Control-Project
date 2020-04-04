@@ -55,4 +55,19 @@ void TwiddleDecrease::run(double error)
     }
 
     context_->changeState(new TwiddleStart());
+
+bool Twiddle::Run(double error)
+{
+    double abs_error = std::abs(error);
+    it_++;
+    average_error_ = (average_error_ + abs_error) / double(it_);
+    if ((it_ > max_it_ && abs_error > maximum_error_) || it_ > force_run_)
+    {
+        current_state_->run(average_error_);
+        it_ = 0;
+        average_error_ = 0.0;
+        return true;
+    }
+
+    return false;
 }
