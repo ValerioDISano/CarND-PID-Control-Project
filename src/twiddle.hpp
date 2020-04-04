@@ -71,6 +71,8 @@ class Twiddle
   private:
     void Run(double error);
     std::unique_ptr<TwiddleState> current_state_;
+    std::unique_ptr<TwiddleState> old_state_;
+
 };
 
 #endif // TWIDDLE_HPP
