@@ -31,6 +31,11 @@ class PID {
    */
   double TotalError();
 
+  std::vector<double> getGains()
+  {
+      return std::vector<double> {Kp, Ki, Kd};
+  }
+
  private:
   /**
    * PID Errors
