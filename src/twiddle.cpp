@@ -2,7 +2,7 @@
 
 void TwiddleState::setContext(Twiddle* context)
 {
-    this->context_ = std::shared_ptr<Twiddle>(context);
+    this->context_ = context;
 }
 
 void Twiddle::changeState(TwiddleState* state)
