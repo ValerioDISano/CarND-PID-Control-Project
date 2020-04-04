@@ -53,11 +53,17 @@ class Twiddle
 {
   public:
     Twiddle(std::vector<double> gains,
-            const double& tolerance=0.2) : tolerance_ {tolerance}
+            const double& tolerance=0.02,
+            const double& maximum_error=2.5,
+            const std::size_t& max_it=100) :
+                tolerance_ {tolerance}, maximum_error_ {maximum_error},
+                max_it_ {max_it}
     {
         gains_ = gains;
         best_solution_ = gains;
-        gains_delta_ = std::vector<double>(gains.size(), 1.0);
+        gains_delta_ = std::vector<double>(gains.size(), 0.1);
+
+        changeState(new TwiddleStart());
     }
     ~Twiddle() {;};
 
