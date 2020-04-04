@@ -31,7 +31,7 @@ string hasData(string s) {
   return "";
 }
 
-bool OPTIMIZATION = true;
+bool OPTIMIZATION = false;
 
 int main() {
   uWS::Hub h;
@@ -40,8 +40,8 @@ int main() {
   /**
    * TODO: Initialize the pid variable.
    */
-  pid.Init(0.158459, 0.0, 0.72632);
-  //pid.Init(0.0, 0.0, 0.0);
+  pid.Init(0.1484559, 0.0001, 0.696846); // best parameters
+  //pid.Init(0.0, 0.0, 0.0); // use this in case of Twiddle optimization
   Twiddle twiddle {pid.getGains()};
 
   h.onMessage([&pid, &twiddle](uWS::WebSocket<uWS::SERVER> ws, char *data, size_t length, 
